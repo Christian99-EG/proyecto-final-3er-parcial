@@ -180,16 +180,10 @@ public:
   ptrListaS s = NULL;
   Power_Ranger(); //DESTRUCTOR ESTANDAr
    ~Power_Ranger(); //CONSTRCUTOR ESTANDAR
-   void Tipo_Articulo(); //QUE ARTICULO SE SELECCIONO POR CADA DEPARTAMENTO
-   void Cancelar_compra(); //metodo que sera implementado con clase virtual
-   void CantidadT(); //cantidad total por todos los articulos
-  //virtual int codigo_articulo(); //codigo por cada articulo
-   void oferta(); //que oferta se le dara al cliente, nota se despliega una lista de descuentos RECUERDALO
-   int descuento(); //aplica el descuento a cada articulo comprado
-  //virtual void total_pagar_Descuento(); //CANTIDAD A PAGAR CON DESCUENTO APLICADO/*
-   void listaCompra();}; //fin de mi clase Tienda_matriz
-
-
+   virtual void Tipo_Articulo(); //QUE ARTICULO SE SELECCIONO POR CADA DEPARTAMENTO
+   virtual void Cancelar_compra(); //metodo que sera implementado con clase virtual
+   virtual void CantidadT(); //cantidad total por todos los articulos
+};
 /*----------------------inicio de la declaracion de metodos de la funcion--------------------------*/
 /*-------------------------------------junto con  constructores-----------------------------------*/
 
@@ -228,81 +222,10 @@ void Power_Ranger::Cancelar_compra()
    cin>>costo;
    cancelar_productoC(p,costo);
 }
-
-void Power_Ranger::oferta()
-{
-
-  cout<<"\t                                                   "<<endl;
-  cout<<"\t                   DESCUENTOS DEL MES              "<<endl;
-  cout<<"\t"<<endl;
-  cout<<"\n \t sujeto a disponiblilidad"<<endl;
-  cout<<"\n"<<endl;
-
-
-  cout<<"\t\t  aplicable para                         descuentos        "<<endl;
-  cout<<"\t\t                                                           "<<endl;
-  cout<<"\t\t  1. Estudiantes                          [ 25 %]          "<<endl;
-  cout<<"\t\t                                                           "<<endl;
-  cout<<"\t\t  2. ADULTOS MAYORES                      [ 30 %]          "<<endl;
-  cout<<"\t\t                                                           "<<endl;
-  cout<<"\t\t  3. ESTUDIANTES IPN                      [ 50 %]          "<<endl;
-  cout<<"\t\t                                                           "<<endl;
-  cout<<"\t\t  4. DOCTORES Y ENFERMER@S                [ 5O %]          "<<endl;
-  cout<<"\t\t                                                           "<<endl;
-  cout<<"\t\t  5. MAESTR@S                              [ 30 %]          "<<endl;
-  cout<<"\t\t                                                           "<<endl;
-}
-
-int Power_Ranger::descuento()
-{ //verificar la funcionalidad de este metodo
-
-  int opcDesc; //opcion de Descuento
-  float x = Sumar_costoT(p);
-  cout<<"Desea aplicar un descuento a su compra: "<<endl;
-  cout<<"1. SI \n 0. NO "<<endl;
-  cout<<"su opcion es: ";
-  cin>>opcDesc;
-
-  switch (opcDesc) {
-    case 1:{
-      cout<<"el descuento se ha aplicado: \n";
-      cout<<"el total a pagar es : "<<(x*0.25)<<endl;
-      break;
-    }
-
-    case 2:{
-      cout<<"el descuento de ha aplicado \n";
-      cout<<"el total a pagar sera de: "<<(x*0.3)<<endl;
-      break;
-    }
-
-    case 3:{
-      cout<<"el descuento se ha aplicado \n";
-      cout<<"el total a pagar sera de: "<<(x*0.5)<<endl;
-      break;
-    }
-
-    case 4:{
-      cout<<"el descuento se ha aplicado \n";
-      cout<<"el total a pagar sera de: "<<(x*0.5)<<endl;
-      break;
-    }
-
-    case 5:{
-      cout<<"el descuento se ha aplicado \n";
-      cout<<"el total a pagar sera de: "<<(x*0.3)<<endl;
-      break;
-    }
-    default:
-     cout<<"no se ingreso ninguna opcion correcta \n";
-  }
-}  //ferificar muy bien el proceso de descuento
-
-void Power_Ranger::listaCompra()
+/*void Power_Ranger::listaCompra()
 {
   cout<<"su lista de compras total es: "<<endl;
-  lista_productosC(p,s);
-}
+}*/
 
 void Power_Ranger::CantidadT()
 { //metodo que me muestra la cantidad total a pagar de la compra (es el ticket)
@@ -758,49 +681,95 @@ public:
   ~AdolescentesM(){}
 };
 
-
 class Electronica
 { //esta es una clase virtual pura
-protected:
-
-   float p_precio;
-   string p_marca;
-   string p_nombre_producto;
 public:
-    virtual void marca() = 0;
-    virtual void precio() = 0;
-    virtual void nombre_producto() = 0;
+    virtual void producto() = 0;
 };
+
 class Television:protected Electronica
 {
 public:
   Television();
-  Television(float);
-  Television(string);
   ~Television();
-
-  void marca();
-  void precio();
-  void nombre_producto();
+  void producto();
 };
 
 Television::Television(){}
-Television::Television(float _precio)
-{p_precio = _precio;}
-Television::Television(string _marca)
-{p_marca = _marca;}
 Television::~Television(){}
 
-
-void Television::marca()
+void Television::producto()
 {
-  cout<<"marca del producto:"<<p_marca<<endl;
+  cout<<"PANTALLAS"<<endl;
+  cout<<"modelos"<<endl;
+  cout<<"PANTALLA LED HISENSE 55P ULTRA HD"<<endl;
+  cout<<"PANTALLA LED HISENSE 60P ULTRA HD"<<endl;
+  cout<<"PANTALLA LED LG 50 4K SMART      "<<endl;
+  cout<<"PANTALLA LED SAMSUNG 65          "<<endl;
+  cout<<"PANTALLA LED LG 50 ULTRA HD      "<<endl;
+  cout<<"PANTALLA LED HISENS 43 HD        "<<endl;
+  cout<<"PANTALLA NANO CELL LG 50  4K     "<<endl;
+  cout<<"PANTALLA LED 75 ULTRA HD         "<<endl;
+  cout<<"PANTALLA LED TLC 50 ULTRA HD     "<<endl;
+  cout<<"PANTALLA LED SAMSUNG 58 HD       "<<endl;
+}
+class computadoras:private Electronica
+{
+public:
+  computadoras();
+  ~computadoras();
+  void producto();
+};
+
+computadoras::computadoras(){}
+computadoras::~computadoras(){}
+
+void computadoras::producto()
+{
+  cout<<"LAPTOPS"<<endl;
+  cout<<"modelos"<<endl;
+	cout<<"LAPTOP HP 14 AMD ATHLON     "<<endl;
+  cout<<"LAPTOP HP 15 AMD RYZEN      "<<endl;
+  cout<<"LAPTOP HP 14 INTEL CELERON  "<<endl;
+  cout<<"LAPTOP DELL 15.6 AMD        "<<endl;
+  cout<<"LAPTOP ASUS INTEL CELERON   "<<endl;
+  cout<<"LAPTOP HP 13 AMD RYZEN 3    "<<endl;
+  cout<<"LAPTOP HUAWEI MT INTEL CORE "<<endl;
+  cout<<"LAPTOP ASUS INTEL CELERON   "<<endl;
+  cout<<"MACBOOK PRO 13              "<<endl;
 }
 
-void Television::precio(){}
+class celulares
+{
+public:
+  celulares();
+  ~celulares();
+  void producto();
+};
 
-void Television::nombre_producto(){}
+celulares::celulares(){}
+celulares::~celulares(){}
 
+void celulares::producto()
+{
+  cout<<"CELULARES"<<endl;
+  cout<<"MODELOS"<<endl;
+  cout<<"XIAOMI REDMI 9A       "<<endl;
+  cout<<"MOTOROLA MOTOG60s     "<<endl;
+  cout<<"XIAMOMI REDMI         "<<endl;
+  cout<<"APPLE IPHONE 11 64GB  "<<endl;
+  cout<<"HISENSE E50-LITE      "<<endl;
+  cout<<"MOTOROLA EDGE20       "<<endl;
+  cout<<"SAMSUNG GALAXY A12    "<<endl;
+  cout<<"MOTOROLA ONE-FUSION   "<<endl;
+  cout<<"XIAOMI REDMI-NOTE     "<<endl;
+  cout<<"SAMSUNG GALAXY-A72    "<<endl;
+  cout<<"IPHONE XR 64GB        "<<endl;
+  cout<<"OPPO   A53            "<<endl;
+  cout<<"MOTOROLA MOTO G60     "<<endl;
+  cout<<"XIAOMI REDMI 10       "<<endl;
+  cout<<"HUAWEI Y9A PLATEADO   "<<endl;
+}
 int main(void)
 {
   menu();
@@ -817,14 +786,9 @@ void menu(void)
   ninos_ninas objninios;
   AdolescentesH objadolescentesh;
   AdolescentesM objadolescentesm;
-
-  float costo;
-  string nombre_marca;
-
-  Television objTelevision;
-  Television objTelevisionf(costo);
-  Television objTelevisions(nombre_marca);
-
+  Television objtelevision;
+  computadoras objcomputadoras;
+  celulares objcelulares;
   int opcionP;
   do{
   cout<<"\t\t\t"<<endl;
@@ -840,11 +804,9 @@ void menu(void)
   cout<<"3. BEBES DE 0-24 MESES                       "<<endl;
   cout<<"4. NI"<<letraM<<"OS Y NI"<<letraM<<"AS \t\t \t       "<<endl;
   cout<<"5. ADOLESCENTES                              "<<endl;
-  cout<<"6. ELEACTRONICA                              "<<endl;
-  cout<<"7. VARIOS   (COMPRA AL MAYOREO)              "<<endl;
-  cout<<"8. CANCELAR PRODUCTOS                        "<<endl;
-  cout<<"9. REALIZAR COMPRA                           "<<endl;
-  cout<<"10. VER LISTA DE COMPRAS                     "<<endl;
+  cout<<"6. ELECTRONICA                               "<<endl;
+  cout<<"7. REALIZAR COMPRA                           "<<endl;
+  cout<<"8. VER LISTA DE COMPRAS                      "<<endl;
   cout<<"\n"<<endl;
 
   cout<<"\n\n"<<endl;
@@ -856,7 +818,7 @@ void menu(void)
   cin>>opcionP; //opcionP == opcion principal
   system("cls");
   switch (opcionP) {
-    case 1:{
+    case 1:{ //departamento hombres
         int opcHombre; //opcion de entrada para el departamento hombre
         cout<<"DEPARTAMENTO DE ROPA Y ACCESORIOS PARA HOMBRE \n";
         cout<<"novedades: "<<endl;
@@ -923,7 +885,7 @@ void menu(void)
         system("cls");
       break;}
 
-    case 2:{
+    case 2:{ //departamento mujeres
       system("cls");
       cout<<"DEPARTAMENTO DE ROPA Y ACCESORIOS PARA MUJER \n";
       int opcMujer;
@@ -986,7 +948,7 @@ void menu(void)
       system("cls");
       break;}
 
-    case 3:{
+    case 3:{//departamento bebes
       char car = 165;
       int opcbebe;
 
@@ -1043,7 +1005,7 @@ void menu(void)
       system("cls");
       break;}
 
-    case 4:{
+    case 4:{//departamento ninios
       //char car = 165;
       int opcninos;
 
@@ -1106,7 +1068,7 @@ void menu(void)
       system("cls");
       break;}
 
-    case 5:{
+    case 5:{//departamento adolescentes
       int decHM;
         int opcadh, opcadm; //opcion de entrada para el departamento hombre y tambien para el departamento de mujeres
       cout<<"a que seccion quieres entrar: "<<endl;
@@ -1240,68 +1202,51 @@ void menu(void)
        system("cls");
       break;}
 
-    case 6:{
+    case 6:{ //departamento electronica
       int opcElec; //opcion de entrada para el departamento hombre
-      cout<<"DEPARTAMENTO DE Electronica \n";
+      cout<<"DEPARTAMENTO DE ELECTRONICA \n";
       cout<<"novedades: "<<endl;
-      cout<<"1. TELEVASIONES";
+      cout<<"1. TELEVASIONES"<<endl;
       cout<<"2. COMPUTADORAS"<<endl;
-      cout<<"3. CELULARES Y TABLES"<<endl;
-      cout<<"4. BOCINAS Y ENTRETENIMIENTO"<<endl;
+      cout<<"3. CELULARES"<<endl;
       cout<<"a que tipo de articulos desea entrar: "; cin>>opcElec;
 
       switch (opcElec) {
         case 1:{
-           cout<<"cual es la marca del producto: ";
-           cin>>nombre_marca;
-           objTelevision.marca();
-           objPR.Tipo_Articulo();
+          objtelevision.producto();
+          objPR.Tipo_Articulo();
           system("pause");
+          system("cls");
           break;
         }
 
         case 2:{
+          objcomputadoras.producto();
+          objPR.Tipo_Articulo();
+          system("pause");
+          system("cls");
           break;
         }
 
         case 3:{
+          objcelulares.producto();
+          objPR.Tipo_Articulo();
+          system("pause");
+          system("cls");
         break;}
       }
     }
-    case 7:{
-      break;}
 
-    case 8:{
-    //  objtiendaMatriz.Tipo_Articulo();
-      break;}
-
-  case 9:{
-
+    case 7:{//realizar compra
+     objPR.CantidadT();
     break;}
 
-  case 10:{
-    int aplicarDes;
-  	system("cls");
-  	objPR.CantidadT();
-    cout<<"o bien, quiere plicar un descuento a su compra? : \n";
-    cout<<" SI -> 1 \n NO -> 0"<<endl;
-    cout<<"desea aplicar descuento: ";
-    cin>>aplicarDes;
-    if(aplicarDes == 1){
-    objPR.oferta();
-    cout<<"el total a pagar sera de : "<<objPR.descuento()<<endl;
-    system("pause");
-  }else{
-    cout<<"entonces su compra seria de: ";
-    objPR.CantidadT();
-    system("pause");
-  }
-	break;}
-
-  case 11:{
+    case 8:{ //lista de compras
+    ptrLista p = NULL;
+    ptrListaS s = NULL;
   	  system("cls");
       cout<<"\t \t \t LISTA DE COMPRAS \n";
-      objPR.listaCompra();
+        lista_productosC(p,s);
       system("pause");
   break;}
 
