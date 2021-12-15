@@ -760,28 +760,17 @@ public:
 
 
 class Electronica
-{
-private:
+{ //esta es una clase virtual pura
+protected:
+
    float p_precio;
    string p_marca;
+   string p_nombre_producto;
 public:
-    Electronica();
-    Electronica(float);
-    Electronica(string);
-    ~Electronica();
-    virtual void marca();
-    virtual void precio();
-    virtual void nombre_producto(string) = 0;
+    virtual void marca() = 0;
+    virtual void precio() = 0;
+    virtual void nombre_producto() = 0;
 };
-
-Electronica::Electronica(){}
-
-Electronica::Electronica(float _precio)
-{p_precio = _precio;}
-
-Electronica::Electronica(string _marca)
-{p_marca = _marca;}
-
 class Television:protected Electronica
 {
 public:
@@ -789,12 +778,28 @@ public:
   Television(float);
   Television(string);
   ~Television();
+
+  void marca();
+  void precio();
+  void nombre_producto();
+};
+
+Television::Television(){}
+Television::Television(float _precio)
+{p_precio = _precio;}
+Television::Television(string _marca)
+{p_marca = _marca;}
+Television::~Television(){}
+
+
+void Television::marca()
+{
+  cout<<"marca del producto:"<<p_marca<<endl;
 }
 
-Television::Television():Electronica(){}
-Television::Television(float _precio):Electronica(_precio){}
-Television::Television(string _marca):Electronica(_marca){}
-Television::~Television(){}
+void Television::precio(){}
+
+void Television::nombre_producto(){}
 
 int main(void)
 {
@@ -813,6 +818,13 @@ void menu(void)
   AdolescentesH objadolescentesh;
   AdolescentesM objadolescentesm;
 
+  float costo;
+  string nombre_marca;
+
+  Television objTelevision;
+  Television objTelevisionf(costo);
+  Television objTelevisions(nombre_marca);
+
   int opcionP;
   do{
   cout<<"\t\t\t"<<endl;
@@ -828,7 +840,7 @@ void menu(void)
   cout<<"3. BEBES DE 0-24 MESES                       "<<endl;
   cout<<"4. NI"<<letraM<<"OS Y NI"<<letraM<<"AS \t\t \t       "<<endl;
   cout<<"5. ADOLESCENTES                              "<<endl;
-  cout<<"6. Electronica                               "<<endl;
+  cout<<"6. ELEACTRONICA                              "<<endl;
   cout<<"7. VARIOS   (COMPRA AL MAYOREO)              "<<endl;
   cout<<"8. CANCELAR PRODUCTOS                        "<<endl;
   cout<<"9. REALIZAR COMPRA                           "<<endl;
@@ -907,6 +919,7 @@ void menu(void)
 		  }
 
         }
+        system("pause");
         system("cls");
       break;}
 
@@ -1026,7 +1039,6 @@ void menu(void)
           break;
         }
       }
-      system("cls");
       system("pause");
       system("cls");
       break;}
@@ -1090,7 +1102,6 @@ void menu(void)
           objPR.Tipo_Articulo();
           break;}
       }
-      system("cls");
       system("pause");
       system("cls");
       break;}
@@ -1225,11 +1236,38 @@ void menu(void)
      }
  }
        }
+       system("pause");
+       system("cls");
       break;}
 
     case 6:{
-      break;}
+      int opcElec; //opcion de entrada para el departamento hombre
+      cout<<"DEPARTAMENTO DE Electronica \n";
+      cout<<"novedades: "<<endl;
+      cout<<"1. TELEVASIONES";
+      cout<<"2. COMPUTADORAS"<<endl;
+      cout<<"3. CELULARES Y TABLES"<<endl;
+      cout<<"4. BOCINAS Y ENTRETENIMIENTO"<<endl;
+      cout<<"a que tipo de articulos desea entrar: "; cin>>opcElec;
 
+      switch (opcElec) {
+        case 1:{
+           cout<<"cual es la marca del producto: ";
+           cin>>nombre_marca;
+           objTelevision.marca();
+           objPR.Tipo_Articulo();
+          system("pause");
+          break;
+        }
+
+        case 2:{
+          break;
+        }
+
+        case 3:{
+        break;}
+      }
+    }
     case 7:{
       break;}
 
